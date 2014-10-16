@@ -179,3 +179,4 @@ obj-y 	+= param_read_write/
 obj-$(CONFIG_OEM_DEBUG_SUPORT) 	+= oem_debug/
 #endif
 #end add by jiachenghui for support oem trace,2015/05/09
+obj-$(CONFIG_ANDROID)		+= android/

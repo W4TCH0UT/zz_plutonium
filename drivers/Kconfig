@@ -199,4 +199,6 @@ source "drivers/oem_debug/Kconfig"
 #endif
 #end add by jiachenghui for support oem trace,2015/05/09
 
+source "drivers/android/Kconfig"
+
 endmenu
