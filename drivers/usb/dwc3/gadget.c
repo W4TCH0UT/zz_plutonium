@@ -2475,6 +2475,7 @@ static int __dwc3_cleanup_done_trbs(struct dwc3 *dwc, struct dwc3_ep *dep,
 	unsigned int		count;
 	unsigned int		s_pkt = 0;
 	unsigned int		trb_status;
+	unsigned int		last_one = 0;
 
 	if ((trb->ctrl & DWC3_TRB_CTRL_HWO) && status != -ESHUTDOWN)
 		/*
