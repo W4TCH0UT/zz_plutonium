@@ -241,8 +241,8 @@ CONFIG_SHELL := $(shell if [ -x "$$BASH" ]; then echo $$BASH; \
 
 HOSTCC       = ccache gcc
 HOSTCXX      = g++
-HOSTCFLAGS   = -Wall -Wmissing-prototypes -Wstrict-prototypes -Ofast -fomit-frame-pointer -pipe -DNDEBUG
-HOSTCXXFLAGS = -pipe -DNDEBUG -Ofast
+HOSTCFLAGS   = -Wall -Wmissing-prototypes -Wstrict-prototypes -O3 -fomit-frame-pointer -pipe -DNDEBUG
+HOSTCXXFLAGS = -pipe -DNDEBUG -O3
 
 # Decide whether to build built-in, modular, or both.
 # Normally, just do built-in.
@@ -342,8 +342,8 @@ CHECK		= sparse
 
 CHECKFLAGS     := -D__linux__ -Dlinux -D__STDC__ -Dunix -D__unix__ \
 		  -Wbitwise -Wno-return-void $(CF)
-KERNEL_FLAGS	= -pipe -DNDEBUG -Ofast -mtune=cortex-a53 -fbranch-target-load-optimize -mcpu=cortex-a53 -funsafe-math-optimizations -fivopts -fipa-pta -fira-hoist-pressure -fno-common -fmodulo-sched -fmodulo-sched-allow-regmoves -fsingle-precision-constant -fpredictive-commoning -fgcse-after-reload -fgcse-las -Wno-array-bounds -Wno-error=strict-overflow -fuse-linker-plugin -std=gnu89
-MOD_FLAGS	= -DMODULE -fno-pic $(KERNEL_FLAGS)
+KERNEL_FLAGS	= -pipe -DNDEBUG -O3 -mtune=cortex-a53 -fbranch-target-load-optimize -mcpu=cortex-a53 -funsafe-math-optimizations -fivopts -fipa-pta -fira-hoist-pressure -fno-common -fmodulo-sched -fmodulo-sched-allow-regmoves -fsingle-precision-constant -fpredictive-commoning -fgcse-after-reload -fgcse-las -Wno-array-bounds -Wno-error=strict-overflow -Wno-maybe-uninitialized -fuse-linker-plugin -std=gnu89
+MOD_FLAGS	= -DMODULE $(KERNEL_FLAGS)
 CFLAGS_MODULE   = $(MOD_FLAGS)
 AFLAGS_MODULE   = $(MOD_FLAGS)
 LDFLAGS_MODULE  = --strip-debug
@@ -581,7 +581,7 @@ all: vmlinux
 ifdef CONFIG_CC_OPTIMIZE_FOR_SIZE
 KBUILD_CFLAGS	+= -Os $(call cc-disable-warning,maybe-uninitialized,)
 else
-KBUILD_CFLAGS	+= -Ofast $(call cc-disable-warning,maybe-uninitialized,)
+KBUILD_CFLAGS	+= -O3 $(call cc-disable-warning,maybe-uninitialized,)
 endif
 
 include $(srctree)/arch/$(SRCARCH)/Makefile
