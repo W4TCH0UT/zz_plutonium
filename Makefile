@@ -343,7 +343,7 @@ CHECK		= sparse
 CHECKFLAGS     := -D__linux__ -Dlinux -D__STDC__ -Dunix -D__unix__ \
 		  -Wbitwise -Wno-return-void $(CF)
 KERNEL_FLAGS	= -pipe -DNDEBUG -Ofast -mtune=cortex-a53 -fbranch-target-load-optimize -mcpu=cortex-a53 -funsafe-math-optimizations -fivopts -fipa-pta -fira-hoist-pressure -fno-common -fmodulo-sched -fmodulo-sched-allow-regmoves -fsingle-precision-constant -fpredictive-commoning -fgcse-after-reload -fgcse-las -Wno-array-bounds -Wno-error=strict-overflow -fuse-linker-plugin -std=gnu89
-MOD_FLAGS	= -DMODULE $(KERNEL_FLAGS)
+MOD_FLAGS	= -DMODULE -fno-pic $(KERNEL_FLAGS)
 CFLAGS_MODULE   = $(MOD_FLAGS)
 AFLAGS_MODULE   = $(MOD_FLAGS)
 LDFLAGS_MODULE  = --strip-debug
