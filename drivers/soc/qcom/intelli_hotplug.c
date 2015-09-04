@@ -243,11 +243,7 @@ static void __ref cpu_up_down_work(struct work_struct *work)
 		for_each_online_cpu(cpu) {
 			if (cpu == 0)
 				continue;
-#ifdef CONFIG_CPU_BOOST
-			if (check_down_lock(cpu) || check_cpuboost(cpu))
-#else
 			if (check_down_lock(cpu))
-#endif
 				break;
 			l_nr_threshold =
 				cpu_nr_run_threshold << 1 / (num_online_cpus());
@@ -332,11 +328,7 @@ static void __ref intelli_plug_resume(void)
 		}
 	}
 
-#ifdef CONFIG_CPU_BOOST
-	if (wakeup_cb_boost || required_wakeup) {
-#else
 	if (required_wakeup) {
-#endif
 		/* Fire up all CPUs */
 		for_each_cpu_not(cpu, cpu_online_mask) {
 			if (cpu == 0)
